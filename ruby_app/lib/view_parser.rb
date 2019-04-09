@@ -10,8 +10,8 @@ class ViewParser < LogFileParser
   private
 
   def fetch_view_count(uniq=false)
-    @parsed_data.each_with_object({}) do |(url, value), logs|
+    res = @parsed_data.each_with_object({}) do |(url, value), logs|
       logs[url] = uniq ? value.uniq.size : value.size
-    end if @parsed_data
+    end.sort_by { |k, v| v }.reverse.to_h if @parsed_data
   end
 end

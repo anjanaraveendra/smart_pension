@@ -8,7 +8,7 @@ RSpec.describe "LogFileParser" do
   describe 'test to handle non existing file' do
     let(:logfile_path) { 'fake/path/to/file.log' }
     it 'returns nil if wrong file is passed' do
-      expect(subject.parse).to eq(nil)
+      expect(subject.parse).to eq('Given file does not exist')
     end
   end
 
@@ -35,7 +35,7 @@ RSpec.describe "LogFileParser" do
     before { subject.parse }
 
     let(:expected_response) do
-      {"/help_page/1"=>5, "/contact"=>2, "/home"=>3, "/about/2"=>1, "/index"=>1, "/about"=>1}
+      {"/help_page/1"=>5, "/home"=>3, "/contact"=>2, "/about"=>1, "/index"=>1, "/about/2"=>1}
     end
 
     it 'returns the correct values' do
@@ -47,7 +47,7 @@ RSpec.describe "LogFileParser" do
     before { subject.parse }
 
     let(:expected_response) do
-      {"/help_page/1"=>5, "/contact"=>1, "/home"=>3, "/about/2"=>1, "/index"=>1, "/about"=>1}
+      { "/help_page/1"=>5, "/home"=>3, "/about"=>1, "/index"=>1, "/about/2"=>1, "/contact"=>1 }
     end
 
     it 'returns the correct values' do
